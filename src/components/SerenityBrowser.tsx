@@ -131,19 +131,12 @@ export function SerenityBrowser() {
 
           {/* Right Side - Controls */}
           <div className="flex items-center space-x-2">
+            <Button variant="ghost" size="sm" onClick={toggleZenMode} className="h-8 w-8 p-0 hover:bg-muted/50 transition-colors" title={zenMode ? "Exit Focus Mode (Ctrl+F)" : "Toggle Focus Mode (Ctrl+F)"}>
+              <Eye className="w-4 h-4" />
+            </Button>
             {!zenMode && (
-              <>
-                <Button variant="ghost" size="sm" onClick={toggleZenMode} className="h-8 w-8 p-0 hover:bg-muted/50 transition-colors" title="Toggle Focus Mode (Ctrl+F)">
-                  <Eye className="w-4 h-4" />
-                </Button>
-                <Button variant="ghost" size="sm" onClick={() => setShowSettings(!showSettings)} className="h-8 w-8 p-0 hover:bg-muted/50 transition-colors">
-                  <Settings className="w-4 h-4" />
-                </Button>
-              </>
-            )}
-            {zenMode && (
-              <Button variant="ghost" size="sm" onClick={toggleZenMode} className="h-8 w-8 p-0 hover:bg-muted/50 transition-colors" title="Exit Focus Mode (Ctrl+F)">
-                <Eye className="w-4 h-4" />
+              <Button variant="ghost" size="sm" onClick={() => setShowSettings(!showSettings)} className="h-8 w-8 p-0 hover:bg-muted/50 transition-colors">
+                <Settings className="w-4 h-4" />
               </Button>
             )}
           </div>
@@ -224,6 +217,24 @@ export function SerenityBrowser() {
           </div>
         </div>
       </motion.header>
+
+      {/* Always Visible Focus Mode Button */}
+      <motion.div 
+        className="fixed top-4 right-6 z-50"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: zenMode ? 1 : 0 }}
+        transition={{ duration: 0.3 }}
+      >
+        <Button 
+          variant="ghost" 
+          size="sm" 
+          onClick={toggleZenMode} 
+          className="h-8 w-8 p-0 hover:bg-muted/50 transition-colors bg-background/80 backdrop-blur-sm border border-border/20"
+          title="Exit Focus Mode (Ctrl+F)"
+        >
+          <Eye className="w-4 h-4" />
+        </Button>
+      </motion.div>
 
       {/* Clean Settings Panel */}
       <AnimatePresence>
