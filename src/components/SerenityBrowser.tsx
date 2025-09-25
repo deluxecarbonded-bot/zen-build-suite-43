@@ -54,7 +54,7 @@ export function SerenityBrowser() {
     setActiveTabId(newTab.id);
   };
 
-  // Add keyboard shortcut for new tab
+  // Add keyboard shortcuts
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       // New tab shortcut (Ctrl/Cmd + T)
@@ -62,11 +62,16 @@ export function SerenityBrowser() {
         e.preventDefault();
         addNewTab();
       }
+      // Focus mode shortcut (Ctrl/Cmd + F)
+      if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+        e.preventDefault();
+        toggleZenMode();
+      }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [toggleZenMode]);
   const closeTab = (tabId: string) => {
     const newTabs = tabs.filter(tab => tab.id !== tabId);
     setTabs(newTabs);
@@ -126,12 +131,21 @@ export function SerenityBrowser() {
 
           {/* Right Side - Controls */}
           <div className="flex items-center space-x-2">
-            <Button variant="ghost" size="sm" onClick={toggleZenMode} className="h-8 w-8 p-0 hover:bg-muted/50 transition-colors" title="Toggle Focus Mode (Ctrl+Z)">
-              <Eye className="w-4 h-4" />
-            </Button>
-            <Button variant="ghost" size="sm" onClick={() => setShowSettings(!showSettings)} className="h-8 w-8 p-0 hover:bg-muted/50 transition-colors">
-              <Settings className="w-4 h-4" />
-            </Button>
+            {!zenMode && (
+              <>
+                <Button variant="ghost" size="sm" onClick={toggleZenMode} className="h-8 w-8 p-0 hover:bg-muted/50 transition-colors" title="Toggle Focus Mode (Ctrl+F)">
+                  <Eye className="w-4 h-4" />
+                </Button>
+                <Button variant="ghost" size="sm" onClick={() => setShowSettings(!showSettings)} className="h-8 w-8 p-0 hover:bg-muted/50 transition-colors">
+                  <Settings className="w-4 h-4" />
+                </Button>
+              </>
+            )}
+            {zenMode && (
+              <Button variant="ghost" size="sm" onClick={toggleZenMode} className="h-8 w-8 p-0 hover:bg-muted/50 transition-colors" title="Exit Focus Mode (Ctrl+F)">
+                <Eye className="w-4 h-4" />
+              </Button>
+            )}
           </div>
         </div>
 
@@ -394,7 +408,7 @@ export function SerenityBrowser() {
           delay: 0.8
         }}>
             <p>
-              <kbd className="px-2 py-0.5 bg-muted/50 rounded text-[10px] font-mono">⌘Z</kbd> 
+              <kbd className="px-2 py-0.5 bg-muted/50 rounded text-[10px] font-mono">⌘F</kbd> 
               <span className="ml-2">Focus Mode</span>
             </p>
           </motion.div>
