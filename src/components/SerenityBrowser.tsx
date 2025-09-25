@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Settings, Moon, Sun, Eye, Palette, MousePointer, Filter, Heart, BookOpen, Plus, X } from 'lucide-react';
+import { Search, Settings, Moon, Sun, Eye, Palette, MousePointer, Filter, Heart, BookOpen, Plus, X, Brain, Zap, Layout, Clock, Shield, Sparkles, Timer } from 'lucide-react';
 import { useTheme } from '@/hooks/use-theme';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -44,6 +44,21 @@ export function SerenityBrowser() {
   const [addressBarValue, setAddressBarValue] = useState('');
   const [showBreathingTimer, setShowBreathingTimer] = useState(false);
   const [showMindfulnessPanel, setShowMindfulnessPanel] = useState(false);
+  
+  // AI-Powered Features Settings
+  const [contentMoodFilter, setContentMoodFilter] = useState(false);
+  const [autoDeClutter, setAutoDeClutter] = useState(false);
+  const [smartTabGrouping, setSmartTabGrouping] = useState(false);
+  const [zenRecommendations, setZenRecommendations] = useState(false);
+  
+  // Tab & Session Management Settings
+  const [invisibleTabs, setInvisibleTabs] = useState(false);
+  const [autoSuspendTabs, setAutoSuspendTabs] = useState(false);
+  const [oneTabMode, setOneTabMode] = useState(false);
+  const [tabHibernation, setTabHibernation] = useState(false);
+  const [zenTabNaming, setZenTabNaming] = useState(false);
+  const [suspendTime, setSuspendTime] = useState(5); // minutes
+  const [hibernationTime, setHibernationTime] = useState(24); // hours
   const addNewTab = () => {
     const newTab: Tab = {
       id: Date.now().toString(),
@@ -366,6 +381,109 @@ export function SerenityBrowser() {
                   </div>
                   <div className="p-2 bg-muted/30 rounded-md">
                     <DistractionBlocker />
+                  </div>
+                </div>
+              </div>
+
+              {/* AI-Powered Features */}
+              <div className="mb-4">
+                <h4 className="text-xs uppercase tracking-wide text-muted-foreground mb-3 font-medium flex items-center">
+                  <Brain className="w-3 h-3 mr-1" />
+                  AI-Powered Features
+                </h4>
+                <div className="space-y-1">
+                  <Button 
+                    variant={contentMoodFilter ? "default" : "ghost"} 
+                    size="sm" 
+                    onClick={() => setContentMoodFilter(!contentMoodFilter)} 
+                    className="w-full justify-start h-8 text-xs"
+                  >
+                    <Shield className="w-3 h-3 mr-2" />
+                    Content Mood Filter
+                  </Button>
+                  <Button 
+                    variant={autoDeClutter ? "default" : "ghost"} 
+                    size="sm" 
+                    onClick={() => setAutoDeClutter(!autoDeClutter)} 
+                    className="w-full justify-start h-8 text-xs"
+                  >
+                    <Zap className="w-3 h-3 mr-2" />
+                    Auto Declutter
+                  </Button>
+                  <Button 
+                    variant={smartTabGrouping ? "default" : "ghost"} 
+                    size="sm" 
+                    onClick={() => setSmartTabGrouping(!smartTabGrouping)} 
+                    className="w-full justify-start h-8 text-xs"
+                  >
+                    <Layout className="w-3 h-3 mr-2" />
+                    Smart Tab Grouping
+                  </Button>
+                  <Button 
+                    variant={zenRecommendations ? "default" : "ghost"} 
+                    size="sm" 
+                    onClick={() => setZenRecommendations(!zenRecommendations)} 
+                    className="w-full justify-start h-8 text-xs"
+                  >
+                    <Sparkles className="w-3 h-3 mr-2" />
+                    Zen Recommendations
+                  </Button>
+                </div>
+              </div>
+
+              {/* Tab & Session Management */}
+              <div className="mb-4">
+                <h4 className="text-xs uppercase tracking-wide text-muted-foreground mb-3 font-medium flex items-center">
+                  <Layout className="w-3 h-3 mr-1" />
+                  Tab & Session Management
+                </h4>
+                <div className="space-y-1">
+                  <Button 
+                    variant={invisibleTabs ? "default" : "ghost"} 
+                    size="sm" 
+                    onClick={() => setInvisibleTabs(!invisibleTabs)} 
+                    className="w-full justify-start h-8 text-xs"
+                  >
+                    <Eye className="w-3 h-3 mr-2" />
+                    Invisible Tabs Mode
+                  </Button>
+                  <Button 
+                    variant={oneTabMode ? "default" : "ghost"} 
+                    size="sm" 
+                    onClick={() => setOneTabMode(!oneTabMode)} 
+                    className="w-full justify-start h-8 text-xs"
+                  >
+                    <Filter className="w-3 h-3 mr-2" />
+                    One-Tab Mode
+                  </Button>
+                  <div className="space-y-2">
+                    <Button 
+                      variant={autoSuspendTabs ? "default" : "ghost"} 
+                      size="sm" 
+                      onClick={() => setAutoSuspendTabs(!autoSuspendTabs)} 
+                      className="w-full justify-start h-8 text-xs"
+                    >
+                      <Timer className="w-3 h-3 mr-2" />
+                      Auto-Suspend Tabs ({suspendTime}m)
+                    </Button>
+                    <Button 
+                      variant={tabHibernation ? "default" : "ghost"} 
+                      size="sm" 
+                      onClick={() => setTabHibernation(!tabHibernation)} 
+                      className="w-full justify-start h-8 text-xs"
+                    >
+                      <Clock className="w-3 h-3 mr-2" />
+                      Tab Hibernation ({hibernationTime}h)
+                    </Button>
+                    <Button 
+                      variant={zenTabNaming ? "default" : "ghost"} 
+                      size="sm" 
+                      onClick={() => setZenTabNaming(!zenTabNaming)} 
+                      className="w-full justify-start h-8 text-xs"
+                    >
+                      <Sparkles className="w-3 h-3 mr-2" />
+                      Zen Tab Naming
+                    </Button>
                   </div>
                 </div>
               </div>
