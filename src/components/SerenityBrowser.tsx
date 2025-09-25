@@ -187,7 +187,25 @@ export function SerenityBrowser() {
           <div className="max-w-xl mx-auto">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <Input value={addressBarValue} onChange={e => setAddressBarValue(e.target.value)} placeholder="Search or enter address..." className="pl-10 border-0 bg-muted/30 focus:bg-muted/50 transition-colors rounded-full h-10" />
+              <Input 
+                value={addressBarValue} 
+                onChange={e => setAddressBarValue(e.target.value)} 
+                placeholder="Search or enter address..." 
+                className="pl-10 pr-16 border-0 bg-muted/30 focus:bg-muted/50 transition-colors rounded-full h-10"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    console.log('Navigate to:', addressBarValue);
+                  }
+                }}
+              />
+              <Button
+                size="sm"
+                onClick={() => console.log('Navigate to:', addressBarValue)}
+                className="absolute right-1 top-1/2 transform -translate-y-1/2 h-8 px-3 rounded-full text-xs"
+                disabled={!addressBarValue.trim()}
+              >
+                Go
+              </Button>
             </div>
           </div>
         </div>
