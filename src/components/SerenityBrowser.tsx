@@ -126,7 +126,7 @@ export function SerenityBrowser() {
 
           {/* Right Side - Controls */}
           <div className="flex items-center space-x-2">
-            <Button variant="ghost" size="sm" onClick={toggleZenMode} className="h-8 w-8 p-0 hover:bg-muted/50 transition-colors" title="Toggle Zen Mode (Ctrl+Z)">
+            <Button variant="ghost" size="sm" onClick={toggleZenMode} className="h-8 w-8 p-0 hover:bg-muted/50 transition-colors" title="Toggle Focus Mode (Ctrl+Z)">
               <Eye className="w-4 h-4" />
             </Button>
             <Button variant="ghost" size="sm" onClick={() => setShowSettings(!showSettings)} className="h-8 w-8 p-0 hover:bg-muted/50 transition-colors">
@@ -288,7 +288,7 @@ export function SerenityBrowser() {
                 <div className="space-y-1">
                   <Button variant={zenMode ? "default" : "ghost"} size="sm" onClick={toggleZenMode} className="w-full justify-start h-8 text-xs">
                     <Eye className="w-3 h-3 mr-2" />
-                    Zen Mode
+                    Focus Mode
                   </Button>
                   
                   <Button variant={blueFilterEnabled ? "default" : "ghost"} size="sm" onClick={toggleBlueFilter} className="w-full justify-start h-8 text-xs">
@@ -395,7 +395,7 @@ export function SerenityBrowser() {
         }}>
             <p>
               <kbd className="px-2 py-0.5 bg-muted/50 rounded text-[10px] font-mono">⌘Z</kbd> 
-              <span className="ml-2">Zen Mode</span>
+              <span className="ml-2">Focus Mode</span>
             </p>
           </motion.div>
         </motion.div>
