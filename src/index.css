@@ -78,8 +78,8 @@
     --card-foreground: var(--foreground);
     --popover: var(--background);
     --popover-foreground: var(--foreground);
-    --primary: var(--zen-primary);
-    --primary-foreground: 220 15% 97%;
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
     --secondary: var(--zen-secondary);
     --secondary-foreground: var(--zen-primary);
     --muted: var(--zen-muted);
@@ -106,8 +106,8 @@
     --card-foreground: 220 15% 92%;
     --popover: 220 15% 10%;
     --popover-foreground: 220 15% 92%;
-    --primary: var(--zen-primary);
-    --primary-foreground: 220 15% 8%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
     --secondary: var(--zen-secondary);
     --secondary-foreground: 220 15% 92%;
     --muted: var(--zen-muted);
@@ -128,7 +128,8 @@
     
     --card: var(--sepia-bg);
     --card-foreground: var(--sepia-fg);
-    --primary: var(--zen-primary);
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
     --secondary: var(--zen-secondary);
     --accent: var(--zen-accent);
     --border: 40 10% 78%;
