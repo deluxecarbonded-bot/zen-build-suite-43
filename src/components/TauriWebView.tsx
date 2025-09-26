@@ -132,14 +132,14 @@ export function TauriWebView({ src, className, onLoad, onNavigation }: TauriWebV
     }
   };
 
-  // Expose methods for parent component
-  React.useImperativeHandle(containerRef, () => ({
-    navigateTo,
-    goBack,
-    goForward,
-    refresh,
-    currentUrl
-  }));
+  // Store navigation methods on container ref for access
+  if (containerRef.current) {
+    (containerRef.current as any).navigateTo = navigateTo;
+    (containerRef.current as any).goBack = goBack;
+    (containerRef.current as any).goForward = goForward;
+    (containerRef.current as any).refresh = refresh;
+    (containerRef.current as any).currentUrl = currentUrl;
+  }
 
   return (
     <div ref={containerRef} className={className}>

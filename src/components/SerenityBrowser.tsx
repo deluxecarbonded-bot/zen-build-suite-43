@@ -659,7 +659,6 @@ export function SerenityBrowser() {
             // Normal browsing mode - show webview
             <div className="w-full h-full">
               <TauriWebView
-                ref={webviewRef}
                 src={tabs.find(tab => tab.id === activeTabId)?.url || 'https://www.google.com'}
                 className="w-full h-full"
                 onLoad={() => {

@@ -128,8 +128,8 @@
     
     --card: var(--sepia-bg);
     --card-foreground: var(--sepia-fg);
-    --primary: 0 0% 0%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 40 25% 60%;
+    --primary-foreground: 40 30% 95%;
     --secondary: var(--zen-secondary);
     --accent: var(--zen-accent);
     --border: 40 10% 78%;
