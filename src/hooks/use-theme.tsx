@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 
-type Theme = 'light' | 'dark' | 'sepia' | 'auto';
+type Theme = 'light' | 'serenity' | 'dark' | 'sepia';
 type AmbientMode = 'dawn' | 'day' | 'dusk' | 'night';
 type CursorTheme = 'default' | 'zen' | 'minimal' | 'calm';
 
@@ -28,7 +28,7 @@ export function useTheme() {
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('auto');
+  const [theme, setTheme] = useState<Theme>('light');
   const [cursorTheme, setCursorTheme] = useState<CursorTheme>('default');
   const [zenMode, setZenMode] = useState(false);
   const [blueFilterEnabled, setBlueFilterEnabled] = useState(false);
@@ -61,30 +61,15 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const root = document.documentElement;
     
     // Remove existing theme classes
-    root.classList.remove('theme-dark', 'theme-sepia');
+    root.classList.remove('theme-serenity', 'theme-dark', 'theme-sepia');
     
     // Apply new theme
-    if (theme === 'dark') {
+    if (theme === 'serenity') {
+      root.classList.add('theme-serenity');
+    } else if (theme === 'dark') {
       root.classList.add('theme-dark');
     } else if (theme === 'sepia') {
       root.classList.add('theme-sepia');
-    } else if (theme === 'auto') {
-      // Use system preference
-      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-      if (mediaQuery.matches) {
-        root.classList.add('theme-dark');
-      }
-      
-      const handleChange = (e: MediaQueryListEvent) => {
-        if (e.matches) {
-          root.classList.add('theme-dark');
-        } else {
-          root.classList.remove('theme-dark');
-        }
-      };
-      
-      mediaQuery.addEventListener('change', handleChange);
-      return () => mediaQuery.removeEventListener('change', handleChange);
     }
   }, [theme]);
 

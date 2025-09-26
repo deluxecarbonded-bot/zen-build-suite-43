@@ -94,7 +94,7 @@
     --radius: 12px;
   }
   
-  .theme-dark {
+  .theme-serenity {
     --background: 220 15% 8%;
     --foreground: 220 15% 92%;
     --zen-primary: 200 30% 70%;
@@ -116,6 +116,30 @@
     --accent-foreground: 220 15% 8%;
     --border: 220 10% 20%;
     --input: 220 10% 18%;
+  }
+
+  .theme-dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 95%;
+    --zen-primary: 0 0% 85%;
+    --zen-secondary: 0 0% 10%;
+    --zen-accent: 0 0% 25%;
+    --zen-muted: 0 0% 8%;
+    
+    --card: 0 0% 3%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 3%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 0 0% 95%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: var(--zen-secondary);
+    --secondary-foreground: 0 0% 95%;
+    --muted: var(--zen-muted);
+    --muted-foreground: 0 0% 65%;
+    --accent: var(--zen-accent);
+    --accent-foreground: 0 0% 95%;
+    --border: 0 0% 15%;
+    --input: 0 0% 12%;
   }
   
   .theme-sepia {
@@ -167,32 +191,60 @@
   .ambient-night { background: var(--ambient-night); }
   
   /* Theme-specific ambient backgrounds */
-  .theme-dark .ambient-dawn { 
+  .theme-serenity .ambient-dawn { 
     background: linear-gradient(135deg, 
       hsl(220, 25%, 12%) 0%, 
       hsl(240, 30%, 15%) 50%,
       hsl(260, 20%, 18%) 100%);
   }
   
-  .theme-dark .ambient-day { 
+  .theme-serenity .ambient-day { 
     background: linear-gradient(135deg,
       hsl(220, 20%, 15%) 0%,
       hsl(240, 25%, 18%) 50%,
       hsl(260, 20%, 20%) 100%);
   }
   
-  .theme-dark .ambient-dusk { 
+  .theme-serenity .ambient-dusk { 
     background: linear-gradient(135deg,
       hsl(280, 30%, 12%) 0%,
       hsl(260, 25%, 15%) 50%,
       hsl(240, 30%, 18%) 100%);
   }
   
-  .theme-dark .ambient-night { 
+  .theme-serenity .ambient-night { 
     background: linear-gradient(135deg,
       hsl(220, 30%, 8%) 0%,
       hsl(240, 35%, 10%) 50%,
       hsl(260, 30%, 12%) 100%);
+  }
+
+  .theme-dark .ambient-dawn { 
+    background: linear-gradient(135deg, 
+      hsl(0, 0%, 0%) 0%, 
+      hsl(0, 0%, 2%) 50%,
+      hsl(0, 0%, 1%) 100%);
+  }
+  
+  .theme-dark .ambient-day { 
+    background: linear-gradient(135deg,
+      hsl(0, 0%, 0%) 0%,
+      hsl(0, 0%, 3%) 50%,
+      hsl(0, 0%, 1%) 100%);
+  }
+  
+  .theme-dark .ambient-dusk { 
+    background: linear-gradient(135deg,
+      hsl(0, 0%, 0%) 0%,
+      hsl(0, 0%, 2%) 50%,
+      hsl(0, 0%, 1%) 100%);
+  }
+  
+  .theme-dark .ambient-night { 
+    background: linear-gradient(135deg,
+      hsl(0, 0%, 0%) 0%,
+      hsl(0, 0%, 1%) 50%,
+      hsl(0, 0%, 0%) 100%);
   }
   
   .theme-sepia .ambient-dawn { 
@@ -314,6 +366,10 @@
   }
   
   /* Theme-specific cursor colors */
+  .theme-serenity .custom-cursor {
+    mix-blend-mode: screen;
+  }
+
   .theme-dark .custom-cursor {
     mix-blend-mode: screen;
   }
@@ -328,7 +384,10 @@
   
   .theme-dark .cursor-calm button:hover,
   .theme-dark .cursor-calm .btn-zen:hover,
-  .theme-dark .cursor-calm [role="button"]:hover {
+  .theme-dark .cursor-calm [role="button"]:hover,
+  .theme-serenity .cursor-calm button:hover,
+  .theme-serenity .cursor-calm .btn-zen:hover,
+  .theme-serenity .cursor-calm [role="button"]:hover {
     cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='none' stroke='%23fff' stroke-width='2' opacity='0.8'/%3E%3Ccircle cx='12' cy='12' r='3' fill='%23fff' opacity='0.9'/%3E%3C/svg%3E") 12 12, pointer;
   }
   

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Settings, Moon, Sun, Eye, Palette, MousePointer, Filter, Heart, BookOpen, Plus, X, Brain, Zap, Layout, Clock, Shield, Sparkles, Timer, RefreshCw, ArrowLeft, ArrowRight, Home, Globe } from 'lucide-react';
+import { Search, Settings, Moon, Sun, Eye, Palette, MousePointer, Filter, Heart, BookOpen, Plus, X, Brain, Zap, Layout, Clock, Shield, Sparkles, Timer, RefreshCw, ArrowLeft, ArrowRight, Home, Globe, Leaf } from 'lucide-react';
 import { useTheme } from '@/hooks/use-theme';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -150,17 +150,17 @@ export function SerenityBrowser() {
     name: 'Light',
     icon: Sun
   }, {
+    id: 'serenity',
+    name: 'Serenity',
+    icon: Leaf
+  }, {
     id: 'dark',
-    name: 'Dark',
+    name: 'Dark Mode',
     icon: Moon
   }, {
     id: 'sepia',
     name: 'Sepia',
     icon: Eye
-  }, {
-    id: 'auto',
-    name: 'Auto',
-    icon: Palette
   }];
   const cursorThemes = [{
     id: 'default',
@@ -366,7 +366,7 @@ export function SerenityBrowser() {
         duration: 0.2
       }}>
             <Card className="p-6 w-80 bg-background/95 backdrop-blur-sm border border-border/20 shadow-xl max-h-[80vh] overflow-y-auto scrollbar scrollbar-track-transparent scrollbar-thumb-border/30 hover:scrollbar-thumb-border/60 scrollbar-w-2">
-              <h3 className="text-base font-medium mb-6">Settings</h3>
+              <h3 className="text-base font-medium mb-6">Serenity Settings Panel</h3>
               
               {/* Custom Appearance Settings */}
               <div className="mb-6">
