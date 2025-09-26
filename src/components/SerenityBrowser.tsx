@@ -332,23 +332,14 @@ export function SerenityBrowser() {
       </motion.header>
 
       {/* Always Visible Focus Mode Controls */}
-      {/* Always visible floating Focus Mode button and Settings in zen mode */}
+      {/* Always visible floating Focus Mode button in zen mode */}
       <motion.div 
-        className="fixed top-4 right-6 z-50 flex space-x-2"
+        className="fixed top-4 right-6 z-50"
         initial={{ opacity: 0 }}
         animate={{ opacity: zenMode ? 1 : 0 }}
         transition={{ duration: 0.3 }}
         style={{ pointerEvents: zenMode ? 'auto' : 'none' }}
       >
-        <Button 
-          variant="ghost" 
-          size="sm" 
-          onClick={() => setShowSettings(true)} 
-          className="h-8 w-8 p-0 hover:bg-muted/50 transition-colors bg-background/80 backdrop-blur-sm border border-border/20"
-          title="Serenity Settings"
-        >
-          <Settings className="w-4 h-4" />
-        </Button>
         <Button 
           variant="ghost" 
           size="sm" 
