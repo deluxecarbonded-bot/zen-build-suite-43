@@ -44,7 +44,7 @@ export function TauriWebView({ src, className, onLoad, onNavigation }: TauriWebV
             alwaysOnTop: false,
             skipTaskbar: false,
             webSecurity: false,
-            fullscreen: false, // Use larger window but not fullscreen for better UX
+            fullscreen: true, // Use larger window but not fullscreen for better UX
             additionalBrowserArgs: [
               '--disable-web-security',
               '--disable-features=VizDisplayCompositor',
