@@ -1,8 +1,8 @@
-# Website Preview Window Fixes
+# Website Preview Window Fixes - Edge WebView2
 
 ## Summary of Changes
 
-This document lists all the changes made to fix website preview windows that were too small and enable full-window rendering with optimized Chrome/Chromium browser engine configuration.
+This document lists all the changes made to fix website preview windows that were too small and enable full-window rendering with optimized Microsoft Edge WebView2 browser engine configuration.
 
 ## Issues Fixed
 
@@ -34,8 +34,8 @@ This document lists all the changes made to fix website preview windows that wer
   - Conditional rendering between normal and full-screen previews
   - Visual feedback for active mode
 
-### 4. Optimized Tauri Browser Configuration for Chrome/Chromium
-- **Problem**: Browser config wasn't optimized for Chrome/Chromium engine without full rendering engine
+### 4. Optimized Tauri Browser Configuration for Edge WebView2
+- **Problem**: Browser config wasn't optimized for Edge WebView2 engine
 - **Solution**: Updated browser arguments and configuration in multiple files
 
 #### File Changes:
@@ -47,15 +47,15 @@ This document lists all the changes made to fix website preview windows that wer
   "height": 1080,
   "minWidth": 1280,
   "minHeight": 720,
-  "additionalBrowserArgs": "optimized-for-chrome-args..."
+  "additionalBrowserArgs": "optimized-for-edge-webview2-args..."
 }
 ```
 
 **2. Updated Rust Backend (`src-tauri/src/main.rs`)**
 - Added fullscreen parameter support to `create_webview` command
-- Enhanced browser arguments list for Chrome/Chromium optimization
+- Enhanced browser arguments list for Edge WebView2 optimization
 - Added hardware acceleration flags
-- Disabled unnecessary features to reduce rendering engine dependencies
+- Disabled unnecessary features to improve Edge WebView2 performance
 
 **3. Dynamic Webview Creation (`src/components/TauriWebView.tsx`)**
 - Added dynamic sizing calculation
@@ -69,24 +69,24 @@ This document lists all the changes made to fix website preview windows that wer
 
 ## Browser Engine Configuration
 
-### Optimized Browser Arguments Applied:
+### Optimized Edge WebView2 Arguments Applied:
 
 **Hardware Acceleration:**
-- `--enable-gpu`
+- `--enable-gpu-acceleration`
 - `--enable-hardware-acceleration`
-- `--enable-gpu-compositing`
-- `--force-accelerated-2d-canvas`
+- `--enable-gpu-rasterization`
+- `--enable-accelerated-2d-canvas`
 
 **Performance Optimization:**
 - `--enable-zero-copy`
-- `--enable-gpu-rasterization`
+- `--enable-smooth-scrolling`
+- `--enable-directwrite`
 - `--enable-threaded-compositing`
-- `--disable-gpu-sandbox`
 
-**Reduced Dependencies (No Full Rendering Engine Required):**
+**Edge WebView2 Specific Features:**
+- `--enable-webview2-features`
 - `--disable-dev-tools`
 - `--disable-extensions`
-- `--disable-components-extensions`
 - `--disable-software-rasterizer`
 
 ## Usage Instructions
@@ -137,8 +137,8 @@ async fn create_webview(
 After these changes:
 1. **Website previews open in properly sized windows** (minimum 1280x720, optimal 1600x900 and above)
 2. **Full-screen preview mode** provides maximum viewing space with dedicated window
-3. **Chrome/Chromium engine** runs efficiently without requiring full rendering engine
+3. **Edge WebView2 engine** runs efficiently with native Windows integration
 4. **Better user experience** with responsive sizing and clear visual feedback
-5. **Optimized browser arguments** ensure smooth performance across all platforms
+5. **Optimized browser arguments** ensure smooth performance across Windows platforms
 
-The implementation provides a professional-grade website preview experience with proper window sizing, full-screen capabilities, and optimized Chrome/Chromium integration.
+The implementation provides a professional-grade website preview experience with proper window sizing, full-screen capabilities, and optimized Edge WebView2 integration for Windows users.

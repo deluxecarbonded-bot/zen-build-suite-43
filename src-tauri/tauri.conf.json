@@ -7,7 +7,7 @@
     "withGlobalTauri": false
   },
   "package": {
-    "productName": "Serenity Browser",
+    "productName": "Serenity Browser - Edge WebView2",
     "version": "0.1.0"
   },
   "tauri": {
@@ -80,7 +80,7 @@
       {
         "fullscreen": true,
         "resizable": true,
-        "title": "Serenity Browser",
+        "title": "Serenity Browser - Edge WebView2",
         "width": 1920,
         "height": 1080,
         "minWidth": 1920,
@@ -91,7 +91,7 @@
         "skipTaskbar": false,
         "titleBarStyle": "Visible",
         "webSecurity": true,
-        "additionalBrowserArgs": "--disable-web-security --disable-features=VizDisplayCompositor --enable-webgl --enable-gpu --enable-accelerated-2d-canvas --enable-accelerated-video-decode --enable-gpu-compositing --enable-hardware-overlays --enable-zero-copy --enable-native-gpu-memory-buffers --enable-gpu-rasterization --enable-oop-rasterization --enable-checker-imaging --enable-gpu-service-logging --enable-logging --v=1 --enable-features=VaapiVideoDecoder --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-renderer-backgrounding --disable-field-trial-config --disable-back-forward-cache --disable-ipc-flooding-protection --enable-webgl2-compute-context --enable-gpu-service --enable-gpu-service-logging --disable-dev-tools --disable-extensions --disable-components-extensions --disable-background-mode --disable-gpu-sandbox --enable-threaded-compositing --enable-hardware-acceleration --disable-software-rasterizer"
+        "additionalBrowserArgs": "--enable-webgl --enable-gpu-acceleration --enable-hardware-acceleration --disable-dev-tools --enable-webview2-features --enable-smooth-scrolling --enable-directwrite --enable-gpu-rasterization --disable-background-timer-throttling"
       }
     ]
   }

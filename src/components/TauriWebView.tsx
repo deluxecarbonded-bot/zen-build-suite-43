@@ -45,33 +45,35 @@ export function TauriWebView({ src, className, onLoad, onNavigation }: TauriWebV
             skipTaskbar: false,
             webSecurity: false,
             fullscreen: true, // Use larger window but not fullscreen for better UX
-            additionalBrowserArgs: [
-              '--disable-web-security',
-              '--disable-features=VizDisplayCompositor',
-              '--enable-webgl',
-              '--enable-gpu',
-              '--enable-accelerated-2d-canvas',
-              '--enable-accelerated-video-decode',
-              '--enable-gpu-compositing',
-              '--enable-hardware-overlays',
-              '--enable-zero-copy',
-              '--enable-native-gpu-memory-buffers',
-              '--enable-gpu-rasterization',
-              '--enable-oop-rasterization',
-              '--enable-checker-imaging',
-              '--enable-gpu-service-logging',
-              '--enable-logging',
-              '--v=1',
-              '--enable-features=VaapiVideoDecoder',
-              '--disable-background-timer-throttling',
-              '--disable-backgrounding-occluded-windows',
-              '--disable-renderer-backgrounding',
-              '--disable-field-trial-config',
-              '--disable-back-forward-cache',
-              '--disable-ipc-flooding-protection',
-              '--enable-webgl2-compute-context',
-              '--enable-gpu-service'
-            ]
+              additionalBrowserArgs: [
+                '--enable-webgl',
+                '--enable-gpu-acceleration',
+                '--enable-hardware-acceleration',
+                '--enable-gpu-rasterization',
+                '--enable-smooth-scrolling',
+                '--enable-directwrite',
+                '--disable-dev-tools',
+                '--disable-extensions',
+                '--disable-background-timer-throttling',
+                '--disable-backgrounding-occluded-windows',
+                '--disable-renderer-backgrounding',
+                '--enable-threaded-compositing',
+                '--enable-accelerated-2d-canvas',
+                '--enable-accelerated-video-decode',
+                '--disable-software-rasterizer',
+                '--enable-webview2-features',
+                '--enable-zero-copy',
+                '--enable-native-gpu-memory-buffers',
+                '--enable-oop-rasterization',
+                '--enable-checker-imaging',
+                '--disable-back-forward-cache',
+                '--disable-ipc-flooding-protection',
+                '--enable-webgl2-compute-context',
+                '--enable-gpu-service',
+                '--disable-background-mode',
+                '--disable-gpu-sandbox',
+                '--enable-hardware-overlays'
+              ]
           });
           
           // Store webview ID for navigation
@@ -178,7 +180,7 @@ export function TauriWebView({ src, className, onLoad, onNavigation }: TauriWebV
                 </div>
                 <h3 className="text-lg font-semibold mb-2">Browser Window Opened</h3>
                 <p className="text-muted-foreground text-sm mb-4">
-                  The webview has been opened in a separate window with full Chrome/Chromium engine support.
+                  The webview has been opened in a separate window with full Edge WebView2 engine support.
                 </p>
                 <p className="text-xs text-muted-foreground/70">
                   URL: {currentUrl}

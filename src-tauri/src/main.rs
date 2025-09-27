@@ -12,7 +12,7 @@ fn greet(name: &str) -> String {
 
 #[tauri::command]
 fn get_system_info() -> String {
-    format!("System: {} - Architecture: {} - Chrome Engine: Active", std::env::consts::OS, std::env::consts::ARCH)
+    format!("System: {} - Architecture: {} - Edge WebView2 Engine: Active", std::env::consts::OS, std::env::consts::ARCH)
 }
 
 #[tauri::command]
@@ -65,50 +65,40 @@ async fn create_webview(
         webview_builder = webview_builder.fullscreen(true);
     }
 
-    // Add browser arguments for enhanced Chrome/Chromium engine support
+    // Add Edge WebView2 optimized arguments for enhanced performance
     let mut browser_args = vec![
-        "--disable-web-security".to_string(),
-        "--disable-features=VizDisplayCompositor".to_string(),
         "--enable-webgl".to_string(),
-        "--enable-gpu".to_string(),
-        "--enable-accelerated-2d-canvas".to_string(),
-        "--enable-accelerated-video-decode".to_string(),
-        "--enable-gpu-compositing".to_string(),
-        "--enable-hardware-overlays".to_string(),
-        "--enable-zero-copy".to_string(),
-        "--enable-native-gpu-memory-buffers".to_string(),
+        "--enable-gpu-acceleration".to_string(),
+        "--enable-hardware-acceleration".to_string(),
         "--enable-gpu-rasterization".to_string(),
-        "--enable-oop-rasterization".to_string(),
-        "--enable-checker-imaging".to_string(),
-        "--enable-gpu-service-logging".to_string(),
-        "--enable-logging".to_string(),
-        "--v=1".to_string(),
-        "--enable-features=VaapiVideoDecoder".to_string(),
+        "--enable-smooth-scrolling".to_string(),
+        "--enable-directwrite".to_string(),
+        "--disable-dev-tools".to_string(),
+        "--disable-extensions".to_string(),
         "--disable-background-timer-throttling".to_string(),
         "--disable-backgrounding-occluded-windows".to_string(),
         "--disable-renderer-backgrounding".to_string(),
-        "--disable-field-trial-config".to_string(),
+        "--enable-threaded-compositing".to_string(),
+        "--enable-accelerated-2d-canvas".to_string(),
+        "--enable-accelerated-video-decode".to_string(),
+        "--disable-software-rasterizer".to_string(),
+        "--enable-webview2-features".to_string(),
+        "--enable-zero-copy".to_string(),
+        "--enable-native-gpu-memory-buffers".to_string(),
+        "--enable-oop-rasterization".to_string(),
+        "--enable-checker-imaging".to_string(),
         "--disable-back-forward-cache".to_string(),
         "--disable-ipc-flooding-protection".to_string(),
         "--enable-webgl2-compute-context".to_string(),
         "--enable-gpu-service".to_string(),
-        "--disable-dev-tools".to_string(),
-        "--disable-extensions".to_string(),
-        "--disable-components-extensions".to_string(),
         "--disable-background-mode".to_string(),
         "--disable-gpu-sandbox".to_string(),
-        "--enable-threaded-compositing".to_string(),
-        "--enable-hardware-acceleration".to_string(),
-        "--disable-software-rasterizer".to_string(),
-        "--disable-layer-elements-4".to_string(),
-        "--force-accelerated-2d-canvas".to_string(),
-        "--disable-gpu-sandbox".to_string(),
-        "--disable-gpu-dev-shm-usage".to_string(),
+        "--enable-hardware-overlays".to_string(),
     ];
     
     browser_args.extend(additional_browser_args);
     
-    // Configure browser with minimal rendering engine dependencies
+    // Configure Edge WebView2 with optimal performance settings
     webview_builder = webview_builder.additional_browser_args(browser_args);
 
     if !web_security {
@@ -225,12 +215,12 @@ fn main() {
             let window = app.get_window("main").unwrap();
             
             // Set window title
-            window.set_title("Serenity Browser - Chrome/Chromium Engine").unwrap();
+            window.set_title("Serenity Browser - Edge WebView2 Engine").unwrap();
             
             // Enable web security for production
             #[cfg(not(debug_assertions))]
             window.with_webview(|webview| {
-                webview.eval("console.log('Serenity Browser loaded with Chrome/Chromium engine');").unwrap();
+                webview.eval("console.log('Serenity Browser loaded with Edge WebView2 engine');").unwrap();
             }).unwrap();
             
             Ok(())

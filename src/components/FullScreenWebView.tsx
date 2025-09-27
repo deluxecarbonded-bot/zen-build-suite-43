@@ -54,36 +54,33 @@ export function FullScreenWebView({
             webSecurity: false,
             fullscreen: fullScreen,
             additionalBrowserArgs: [
-              '--disable-web-security',
-              '--disable-features=VizDisplayCompositor',
               '--enable-webgl',
-              '--enable-gpu',
-              '--enable-accelerated-2d-canvas',
-              '--enable-accelerated-video-decode',
-              '--enable-gpu-compositing',
-              '--enable-hardware-overlays',
-              '--enable-zero-copy',
-              '--enable-native-gpu-memory-buffers',
+              '--enable-gpu-acceleration',
+              '--enable-hardware-acceleration',
               '--enable-gpu-rasterization',
-              '--enable-oop-rasterization',
-              '--enable-checker-imaging',
-              '--enable-gpu-service-logging',
-              '--enable-logging',
-              '--v=1',
-              '--enable-features=VaapiVideoDecoder',
+              '--enable-smooth-scrolling',
+              '--enable-directwrite',
+              '--disable-dev-tools',
+              '--disable-extensions',
               '--disable-background-timer-throttling',
               '--disable-backgrounding-occluded-windows',
               '--disable-renderer-backgrounding',
-              '--disable-field-trial-config',
+              '--enable-threaded-compositing',
+              '--enable-accelerated-2d-canvas',
+              '--enable-accelerated-video-decode',
+              '--disable-software-rasterizer',
+              '--enable-webview2-features',
+              '--enable-zero-copy',
+              '--enable-native-gpu-memory-buffers',
+              '--enable-oop-rasterization',
+              '--enable-checker-imaging',
               '--disable-back-forward-cache',
               '--disable-ipc-flooding-protection',
               '--enable-webgl2-compute-context',
               '--enable-gpu-service',
-              '--disable-dev-tools',
-              '--disable-extensions',
-              '--enable-threaded-compositing',
-              '--enable-hardware-acceleration',
-              '--disable-software-rasterizer'
+              '--disable-background-mode',
+              '--disable-gpu-sandbox',
+              '--enable-hardware-overlays'
             ]
           });
           
@@ -182,7 +179,7 @@ export function FullScreenWebView({
                 </div>
                 <h3 className="text-xl font-semibold mb-3">Full-Screen Preview Window</h3>
                 <p className="text-muted-foreground text-sm mb-4">
-                  The website has been opened in a separate full-screen window using the Chrome/Chromium engine.
+                  The website has been opened in a separate full-screen window using the Edge WebView2 engine.
                 </p>
                 <p className="text-xs text-muted-foreground bg-muted/30 rounded px-3 py-1.5">
                   <strong>URL:</strong> {currentUrl}
