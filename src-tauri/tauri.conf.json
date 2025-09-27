@@ -60,15 +60,21 @@
     },
     "bundle": {
       "active": true,
-      "targets": "all",
-      "identifier": "com.zenbuildsuite.app",
+      "targets": ["msi", "nsis"],
+      "identifier": "com.serenity.browser.edgewebview2",
       "icon": [
-        "icons/32x32.png",
-        "icons/128x128.png",
-        "icons/128x128@2x.png",
-        "icons/icon.icns",
         "icons/icon.ico"
-      ]
+      ],
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": ""
+      },
+      "publisher": "Serenity Browser Team",
+      "copyright": "Copyright © 2024 Serenity Browser",
+      "category": "Productivity",
+      "shortDescription": "Serenity Browser with Edge WebView2",
+      "longDescription": "A minimalist, distraction-free browser powered by Microsoft Edge WebView2 for optimal website display and performance on Windows."
     },
     "security": {
       "csp": "default-src 'self' http: https: data: blob:; connect-src http: https:; frame-src http: https:;"
