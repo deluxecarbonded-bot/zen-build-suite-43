@@ -16,7 +16,8 @@ import { DistractionBlocker } from '@/components/mindfulness/DistractionBlocker'
 import { TextToSpeech } from '@/components/reading/TextToSpeech';
 import { WordCount } from '@/components/reading/WordCount';
 import { AutoScroll } from '@/components/reading/AutoScroll';
-import { UniversalBrowser } from '@/components/UniversalBrowser';
+import { TauriWebView } from '@/components/TauriWebView';
+import { FullScreenWebView } from '@/components/FullScreenWebView';
 interface Tab {
   id: string;
   title: string;
@@ -51,6 +52,7 @@ export function SerenityBrowser() {
   const [addressBarValue, setAddressBarValue] = useState('https://www.google.com');
   const [showBreathingTimer, setShowBreathingTimer] = useState(false);
   const [showMindfulnessPanel, setShowMindfulnessPanel] = useState(false);
+  const [useFullScreenPreview, setUseFullScreenPreview] = useState(false);
   const webviewRef = useRef<any>(null);
   
   // AI-Powered Features Settings
@@ -92,7 +94,7 @@ export function SerenityBrowser() {
     ));
     setAddressBarValue(url);
     
-    // Use UniversalBrowser methods
+    // Use TauriWebView methods
     if (webviewRef.current) {
       webviewRef.current.navigateTo(url);
     }
@@ -300,6 +302,15 @@ export function SerenityBrowser() {
                   title="Home"
                 >
                   <Home className="w-4 h-4" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setUseFullScreenPreview(!useFullScreenPreview)}
+                  className="h-8 w-8 p-0 hover:bg-muted/50 transition-colors"
+                  title={useFullScreenPreview ? "Exit full-screen preview" : "Open in full-screen preview"}
+                >
+                  {useFullScreenPreview ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
                 </Button>
               </div>
 
@@ -651,26 +662,48 @@ export function SerenityBrowser() {
           ) : (
             // Normal browsing mode - show webview
             <div className="w-full h-full">
-              <UniversalBrowser
-                ref={webviewRef}
-                url={tabs.find(tab => tab.id === activeTabId)?.url || 'https://www.google.com'}
-                className="w-full h-full"
-                onLoad={() => {
-                  setTabs(tabs.map(tab => 
-                    tab.id === activeTabId 
-                      ? { ...tab, isLoading: false }
-                      : tab
-                  ));
-                }}
-                onNavigation={(url) => {
-                  setAddressBarValue(url);
-                  setTabs(tabs.map(tab => 
-                    tab.id === activeTabId 
-                      ? { ...tab, url, title: url }
-                      : tab
-                  ));
-                }}
-              />
+              {useFullScreenPreview ? (
+                <FullScreenWebView
+                  src={tabs.find(tab => tab.id === activeTabId)?.url || 'https://www.google.com'}
+                  className="w-full h-full"
+                  fullScreen={true}
+                  onLoad={() => {
+                    setTabs(tabs.map(tab => 
+                      tab.id === activeTabId 
+                        ? { ...tab, isLoading: false }
+                        : tab
+                    ));
+                  }}
+                  onNavigation={(url) => {
+                    setAddressBarValue(url);
+                    setTabs(tabs.map(tab => 
+                      tab.id === activeTabId 
+                        ? { ...tab, url }
+                        : tab
+                    ));
+                  }}
+                />
+              ) : (
+                <TauriWebView
+                  src={tabs.find(tab => tab.id === activeTabId)?.url || 'https://www.google.com'}
+                  className="w-full h-full"
+                  onLoad={() => {
+                    setTabs(tabs.map(tab => 
+                      tab.id === activeTabId 
+                        ? { ...tab, isLoading: false }
+                        : tab
+                    ));
+                  }}
+                  onNavigation={(url) => {
+                    setAddressBarValue(url);
+                    setTabs(tabs.map(tab => 
+                      tab.id === activeTabId 
+                        ? { ...tab, url }
+                        : tab
+                    ));
+                  }}
+                />
+              )}
             </div>
           )}
         </div>

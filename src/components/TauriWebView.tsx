@@ -8,7 +8,7 @@ interface TauriWebViewProps {
   onNavigation?: (url: string) => void;
 }
 
-export const TauriWebView = React.forwardRef<any, TauriWebViewProps>(({ src, className, onLoad, onNavigation }, ref) => {
+export function TauriWebView({ src, className, onLoad, onNavigation }: TauriWebViewProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [currentUrl, setCurrentUrl] = useState(src);
@@ -25,13 +25,7 @@ export const TauriWebView = React.forwardRef<any, TauriWebViewProps>(({ src, cla
     return { width, height };
   };
 
-  // Store current loading state to prevent infinite loops
-  const [hasInitialized, setHasInitialized] = useState(false);
-
   useEffect(() => {
-    // Prevent multiple initializations
-    if (hasInitialized) return;
-
     const loadWebView = async () => {
       try {
         // Check if we're in a Tauri environment
@@ -83,28 +77,23 @@ export const TauriWebView = React.forwardRef<any, TauriWebViewProps>(({ src, cla
           });
           
           // Store webview ID for navigation
-          if (containerRef.current) {
-            (containerRef.current as any).webviewId = webviewId;
-          }
+          (containerRef.current as any).webviewId = webviewId;
           
           setIsLoading(false);
-          setHasInitialized(true);
           onLoad?.();
         } else {
           // Fallback for development - use iframe
           setIsLoading(false);
-          setHasInitialized(true);
           onLoad?.();
         }
       } catch (error) {
         console.error('Failed to create webview:', error);
         setIsLoading(false);
-        setHasInitialized(true);
       }
     };
 
     loadWebView();
-  }, [src]); // Remove onLoad from dependencies to prevent infinite loop
+  }, [src, onLoad]);
 
   const navigateTo = async (url: string) => {
     try {
@@ -161,14 +150,6 @@ export const TauriWebView = React.forwardRef<any, TauriWebViewProps>(({ src, cla
   };
 
   // Store navigation methods on container ref for access
-  React.useImperativeHandle(ref, () => ({
-    navigateTo,
-    goBack,
-    goForward, 
-    refresh,
-    currentUrl
-  }));
-
   if (containerRef.current) {
     (containerRef.current as any).navigateTo = navigateTo;
     (containerRef.current as any).goBack = goBack;
@@ -223,4 +204,4 @@ export const TauriWebView = React.forwardRef<any, TauriWebViewProps>(({ src, cla
       )}
     </div>
   );
-});
+}

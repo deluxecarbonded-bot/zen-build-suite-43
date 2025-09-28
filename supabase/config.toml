@@ -1,4 +1,0 @@
-project_id = "xnhvdnxtqpbpzifoennw"
-
-[functions.browserless-render]
-verify_jwt = false
