@@ -60,21 +60,59 @@
     },
     "bundle": {
       "active": true,
-      "targets": ["msi", "nsis"],
-      "identifier": "com.serenity.browser.edgewebview2",
+      "targets": "all",
+      "identifier": "com.serenity.browser.multiplatform",
       "icon": [
         "icons/icon.ico"
       ],
       "windows": {
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",
-        "timestampUrl": ""
+        "timestampUrl": "",
+        "wix": {
+          "template": "main.wxs"
+        },
+        "nsis": {
+          "template": "installer.nsi",
+          "preCompressHooks": [],
+          "postCompressHooks": []
+        }
+      },
+      "macOS": {
+        "frameworks": [],
+        "minimumSystemVersion": "10.13",
+        "entitlements": null,
+        "exceptionDomain": "",
+        "signingIdentity": null,
+        "hardenedRuntime": true,
+        "dmg": {
+          "appPosition": {
+            "x": 180,
+            "y": 170
+          },
+          "applicationFolderPosition": {
+            "x": 480,
+            "y": 170
+          },
+          "windowSize": {
+            "width": 660,
+            "height": 400
+          }
+        }
+      },
+      "linux": {
+        "deb": {
+          "depends": ["libwebkit2gtk-4.0-37", "libgtk-3-0"]
+        },
+        "appimage": {
+          "bundleMediaFramework": false
+        }
       },
       "publisher": "Serenity Browser Team",
       "copyright": "Copyright © 2024 Serenity Browser",
       "category": "Productivity",
-      "shortDescription": "Serenity Browser with Edge WebView2",
-      "longDescription": "A minimalist, distraction-free browser powered by Microsoft Edge WebView2 for optimal website display and performance on Windows."
+      "shortDescription": "Cross-platform Serenity Browser",
+      "longDescription": "A minimalist, distraction-free browser with native web engine support across Windows (Edge WebView2), macOS (WebKit), and Linux (WebKitGTK)."
     },
     "security": {
       "csp": "default-src 'self' http: https: data: blob:; connect-src http: https:; frame-src http: https:;"
