@@ -44,7 +44,9 @@ serve(async (req) => {
         endpoint = 'https://production-sfo.browserless.io/screenshot';
         body = {
           url: url,
-          ...options.screenshot
+          options: {
+            ...(options as any).screenshot
+          }
         };
         break;
       
@@ -52,7 +54,9 @@ serve(async (req) => {
         endpoint = 'https://production-sfo.browserless.io/pdf';
         body = {
           url: url,
-          ...options.pdf
+          options: {
+            ...(options as any).pdf
+          }
         };
         break;
       
@@ -67,11 +71,14 @@ serve(async (req) => {
         endpoint = 'https://production-sfo.browserless.io/scrape';
         body = {
           url: url,
-          elements: options.elements || [
+          elements: ((options as any).elements || [
             { selector: 'title' },
             { selector: 'meta[name="description"]' },
             { selector: 'body' }
-          ]
+          ]).map((el: any) => {
+            if (typeof el === 'string') return { selector: el };
+            return { selector: el.selector };
+          })
         };
         break;
       
@@ -114,7 +121,7 @@ serve(async (req) => {
 
     const contentType = response.headers.get('content-type') || '';
     
-    if (type === 'content' || type === 'scrape') {
+    if (type === 'scrape') {
       const data = await response.json();
       return new Response(
         JSON.stringify(data),
@@ -122,6 +129,11 @@ serve(async (req) => {
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         }
       );
+    } else if (type === 'content') {
+      const html = await response.text();
+      return new Response(html, {
+        headers: { ...corsHeaders, 'Content-Type': 'text/html; charset=utf-8' },
+      });
     } else {
       // For screenshot and PDF, return the binary data
       const data = await response.arrayBuffer();
