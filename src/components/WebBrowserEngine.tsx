@@ -223,7 +223,10 @@ export function WebBrowserEngine({ url, className, onLoad, onNavigation }: WebBr
                       <div className="text-sm">
                         {item.results?.map((result: any, resultIndex: number) => (
                           <div key={resultIndex} className="mb-2 last:mb-0">
-                            {result.text || result.href || result}
+                            {typeof result === 'string' 
+                              ? result 
+                              : result.text || result.href || result.html || JSON.stringify(result, null, 2)
+                            }
                           </div>
                         ))}
                       </div>
