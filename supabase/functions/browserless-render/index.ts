@@ -41,7 +41,7 @@ serve(async (req) => {
 
     switch (type) {
       case 'screenshot':
-        endpoint = 'https://chrome.browserless.io/screenshot';
+        endpoint = 'https://production-sfo.browserless.io/screenshot';
         body = {
           url: url,
           options: {
@@ -54,7 +54,7 @@ serve(async (req) => {
         break;
       
       case 'pdf':
-        endpoint = 'https://chrome.browserless.io/pdf';
+        endpoint = 'https://production-sfo.browserless.io/pdf';
         body = {
           url: url,
           options: {
@@ -66,7 +66,7 @@ serve(async (req) => {
         break;
       
       case 'content':
-        endpoint = 'https://chrome.browserless.io/content';
+        endpoint = 'https://production-sfo.browserless.io/content';
         body = {
           url: url,
           waitFor: options.waitFor || 1000
@@ -74,7 +74,7 @@ serve(async (req) => {
         break;
       
       case 'scrape':
-        endpoint = 'https://chrome.browserless.io/scrape';
+        endpoint = 'https://production-sfo.browserless.io/scrape';
         body = {
           url: url,
           elements: options.elements || [
