@@ -77,10 +77,9 @@ export function WebBrowserEngine({ url, className, onLoad, onNavigation }: WebBr
           options: {
             elements: [
               { selector: 'title' },
-              { selector: 'meta[name="description"]', attribute: 'content' },
               { selector: 'h1, h2, h3' },
               { selector: 'p' },
-              { selector: 'a', attribute: 'href' }
+              { selector: 'a' }
             ]
           }
         }

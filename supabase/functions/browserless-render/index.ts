@@ -73,9 +73,10 @@ serve(async (req) => {
           url: url,
           elements: ((options as any).elements || [
             { selector: 'title' },
-            { selector: 'meta[name="description"]' },
+            { selector: 'h1, h2, h3' },
             { selector: 'body' }
           ]).map((el: any) => {
+            // Only use selector, ignore attribute parameter
             if (typeof el === 'string') return { selector: el };
             return { selector: el.selector };
           })
