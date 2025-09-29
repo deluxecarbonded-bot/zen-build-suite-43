@@ -44,12 +44,7 @@ serve(async (req) => {
         endpoint = 'https://production-sfo.browserless.io/screenshot';
         body = {
           url: url,
-          options: {
-            fullPage: false,
-            type: 'jpeg',
-            quality: 90,
-            ...options.screenshot
-          }
+          ...options.screenshot
         };
         break;
       
@@ -57,19 +52,14 @@ serve(async (req) => {
         endpoint = 'https://production-sfo.browserless.io/pdf';
         body = {
           url: url,
-          options: {
-            displayHeaderFooter: false,
-            format: 'A4',
-            ...options.pdf
-          }
+          ...options.pdf
         };
         break;
       
       case 'content':
         endpoint = 'https://production-sfo.browserless.io/content';
         body = {
-          url: url,
-          waitFor: options.waitFor || 1000
+          url: url
         };
         break;
       
@@ -79,8 +69,8 @@ serve(async (req) => {
           url: url,
           elements: options.elements || [
             { selector: 'title' },
-            { selector: 'meta[name="description"]', attribute: 'content' },
-            { selector: 'body', property: 'innerHTML' }
+            { selector: 'meta[name="description"]' },
+            { selector: 'body' }
           ]
         };
         break;
