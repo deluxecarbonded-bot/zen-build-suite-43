@@ -72,14 +72,17 @@ serve(async (req) => {
         body = {
           url: url,
           elements: ((options as any).elements || [
-            { selector: 'title' },
-            { selector: 'h1, h2, h3' },
-            { selector: 'body' }
-          ]).map((el: any) => {
-            // Only use selector, ignore attribute parameter
-            if (typeof el === 'string') return { selector: el };
-            return { selector: el.selector };
-          })
+            { selector: 'h1' },
+            { selector: 'p' },
+            { selector: 'a' }
+          ]).map((el: any) => (typeof el === 'string' ? { selector: el } : { selector: el.selector })),
+          ...(options as any).gotoOptions ? { gotoOptions: (options as any).gotoOptions } : {},
+          ...(options as any).waitForTimeout ? { waitForTimeout: (options as any).waitForTimeout } : {},
+          ...(options as any).waitForSelector ? {
+            waitForSelector: typeof (options as any).waitForSelector === 'string'
+              ? { selector: (options as any).waitForSelector }
+              : { selector: (options as any).waitForSelector.selector, timeout: (options as any).waitForSelector.timeout }
+          } : {}
         };
         break;
       
@@ -95,7 +98,7 @@ serve(async (req) => {
 
     console.log(`Making Browserless API request to ${endpoint} for URL: ${url}`);
 
-    const response = await fetch(`${endpoint}?token=${browserlessApiKey}`, {
+    const doRequest = async () => fetch(`${endpoint}?token=${browserlessApiKey}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -103,6 +106,15 @@ serve(async (req) => {
       },
       body: JSON.stringify(body)
     });
+
+    let response = await doRequest();
+
+    if (!response.ok && (response.status === 429 || response.status === 408) && type === 'scrape') {
+      // Basic retry with small backoff and increased wait
+      (body as any).waitForTimeout = Math.max((body as any).waitForTimeout || 0, 1500);
+      await new Promise((r) => setTimeout(r, 800));
+      response = await doRequest();
+    }
 
     if (!response.ok) {
       const errorText = await response.text();

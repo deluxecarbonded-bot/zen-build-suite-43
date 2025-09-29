@@ -80,7 +80,12 @@ export function WebBrowserEngine({ url, className, onLoad, onNavigation }: WebBr
               { selector: 'h1, h2, h3' },
               { selector: 'p' },
               { selector: 'a' }
-            ]
+            ],
+            gotoOptions: {
+              timeout: 15000,
+              waitUntil: 'networkidle2'
+            },
+            waitForTimeout: 1000
           }
         }
       });
